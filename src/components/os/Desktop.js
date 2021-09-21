@@ -39,7 +39,7 @@ function Desktop({ desktopFiles, openTask }) {
                   componentProps: file.componentProps
                 });
               }}
-              icon={appInfo.icon}
+              icon={appInfo.icon({})}
               appname={appInfo.appname}
               filename={file.componentProps.subtitle}
             />

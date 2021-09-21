@@ -1,6 +1,7 @@
 import { Grid, makeStyles } from "@material-ui/core";
 import React from "react";
 import Wallpaper from "../../assets/wallpaper.png";
+import { APP_BAR_HEIGHT } from "./MyAppBar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     flex: 1
   },
   toolbarSpacing: {
-    height: 48
+    height: APP_BAR_HEIGHT
   }
   // toolbarSpacing: () => {
   //   return {

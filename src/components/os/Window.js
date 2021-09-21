@@ -7,8 +7,12 @@ import { connect } from "react-redux";
 import { Resizable } from "react-resizable";
 import TaskContext from "../../contexts/TaskContext";
 import { selectTask } from "../../redux/task/task.reducer";
-import { selectTaskZIndexes } from "../../redux/task/task.selectors";
+import {
+  selectCurrentTaskId,
+  selectTaskZIndexes
+} from "../../redux/task/task.selectors";
 import { COMPONENT_INFO } from "../apps/main";
+import { APP_BAR_HEIGHT } from "./MyAppBar";
 
 const useStyles = makeStyles((theme) => ({
   root: ({ width, height, zIndex }) => ({
@@ -57,6 +61,7 @@ function Window({
   children,
   //Redux states
   taskZIndexes,
+  currentTaskId,
   //Redux actions
   selectTask
 }) {
@@ -85,7 +90,9 @@ function Window({
     return windowProps.fullscreen ? window.innerWidth : windowProps.width;
   }, [windowProps.width, windowProps.fullscreen]);
   const height = useMemo(() => {
-    return windowProps.fullscreen ? window.innerHeight : windowProps.height;
+    return windowProps.fullscreen
+      ? window.innerHeight - APP_BAR_HEIGHT
+      : windowProps.height;
   }, [windowProps.height, windowProps.fullscreen]);
   const classes = useStyles({
     isDragging,
@@ -227,7 +234,7 @@ function Window({
           <Grid item className={classes.windowContent}>
             {children}
           </Grid>
-          {taskZIndexes.indexOf(taskId) !== taskZIndexes.length - 1 && (
+          {currentTaskId !== taskId && (
             <div
               className={classes.inactive}
               onClick={() => {
@@ -242,7 +249,8 @@ function Window({
 }
 
 const mapStateToProps = (state) => ({
-  taskZIndexes: selectTaskZIndexes(state)
+  taskZIndexes: selectTaskZIndexes(state),
+  currentTaskId: selectCurrentTaskId(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

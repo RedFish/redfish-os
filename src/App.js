@@ -2,7 +2,6 @@ import Screen from "./components/os/Screen";
 import Window from "./components/os/Window";
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import "./App.css";
-import { amber, pink } from "@material-ui/core/colors";
 import MyAppBar from "./components/os/MyAppBar";
 import { connect } from "react-redux";
 import Desktop from "./components/os/Desktop";
@@ -17,8 +16,12 @@ import ComponentLoader from "./components/os/ComponentLoader";
 
 const theme = createTheme({
   palette: {
-    primary: amber,
-    secondary: pink
+    primary: {
+      main: "#90caf9"
+    },
+    secondary: {
+      main: "#ff4081"
+    }
   },
   typography: {
     button: {
@@ -78,7 +81,7 @@ function App({
     <ThemeProvider theme={theme}>
       <Screen>
         <Desktop />
-        {taskContents.map((taskContent, index) => {
+        {taskContents.map((taskContent) => {
           const value = {
             ...taskContent,
             closeTask: handleCloseTask(taskContent.taskId),
@@ -86,7 +89,7 @@ function App({
             updateTaskComponent: handleUpdateTaskComponent(taskContent.taskId)
           };
           return (
-            <TaskContext.Provider key={index} value={value}>
+            <TaskContext.Provider key={taskContent.taskId} value={value}>
               <Window>
                 <ComponentLoader />
               </Window>

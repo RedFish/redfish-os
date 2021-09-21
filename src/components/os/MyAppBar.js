@@ -3,12 +3,23 @@ import {
   Grid,
   IconButton,
   makeStyles,
-  Tab,
   Tabs,
   Toolbar
 } from "@material-ui/core";
-import { Menu, MoreVert, Phone } from "@material-ui/icons";
-import { useState } from "react";
+import { MoreVert } from "@material-ui/icons";
+import { connect } from "react-redux";
+import { closeTask, selectTask } from "../../redux/task/task.reducer";
+import {
+  selectCurrentTaskId,
+  selectTaskContents,
+  selectTaskXOrders
+} from "../../redux/task/task.selectors";
+import { COMPONENT_INFO } from "../apps/main";
+import MyAppBarItem from "./MyAppBarItem";
+import MyAppBarMenu from "./MyAppBarMenu";
+import MyAppBarTime from "./MyAppBarTime";
+
+export const APP_BAR_HEIGHT = 62;
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -16,17 +27,23 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0
   },
   tabs: {
-    width: "calc(100% - 60px)"
+    width: "calc(100% - 140px)",
+    "& .MuiTabs-scroller": {
+      height: APP_BAR_HEIGHT
+    }
   }
 }));
 
-function MyAppBar(props) {
+function MyAppBar({
+  //Redux state
+  taskXOrders,
+  taskContents,
+  currentTaskId,
+  //Redux action
+  selectTask,
+  closeTask
+}) {
   const classes = useStyles();
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
   return (
     <AppBar position="fixed" color="primary" className={classes.appBar}>
@@ -34,30 +51,61 @@ function MyAppBar(props) {
         <Grid
           container
           direction="row"
-          justifyContent="space-evenly"
+          justifyContent="space-between"
           alignItems="center"
         >
           <Grid item>
-            <IconButton edge="start" color="inherit" aria-label="open drawer">
-              <Menu />
-            </IconButton>
+            <MyAppBarMenu />
           </Grid>
           <Grid item className={classes.tabs}>
             <Tabs
-              value={value}
-              onChange={handleChange}
+              value={taskXOrders.indexOf(currentTaskId)}
               variant="scrollable"
               scrollButtons="on"
             >
-              <Tab icon={<Phone />} label="Item One" />
-              <Tab label="Item Two" />
-              <Tab label="Item Three" />
+              {taskXOrders.map((taskId, index) => {
+                const taskContent = taskContents[taskId];
+                const appInfo = COMPONENT_INFO[taskContent.component];
+
+                return (
+                  <MyAppBarItem
+                    key={index}
+                    onClick={() => {
+                      selectTask({
+                        taskId: taskContent.taskId
+                      });
+                    }}
+                    onClose={() => {
+                      closeTask({
+                        taskId: taskContent.taskId
+                      });
+                    }}
+                    icon={appInfo.icon({ size: "2x" })}
+                    appname={appInfo.appname}
+                    subtitle={taskContent.componentProps.subtitle}
+                    isActive={currentTaskId === taskContent.taskId}
+                  />
+                );
+              })}
             </Tabs>
           </Grid>
           <Grid item>
-            <IconButton edge="end" color="inherit">
-              <MoreVert />
-            </IconButton>
+            <Grid
+              container
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              spacing={1}
+            >
+              <Grid item>
+                <IconButton color="inherit">
+                  <MoreVert />
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <MyAppBarTime />
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Toolbar>
@@ -65,4 +113,15 @@ function MyAppBar(props) {
   );
 }
 
-export default MyAppBar;
+const mapStateToProps = (state) => ({
+  taskXOrders: selectTaskXOrders(state),
+  taskContents: selectTaskContents(state),
+  currentTaskId: selectCurrentTaskId(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  selectTask: (payload) => dispatch(selectTask(payload)),
+  closeTask: (payload) => dispatch(closeTask(payload))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyAppBar);
