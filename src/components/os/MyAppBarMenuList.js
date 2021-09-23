@@ -1,5 +1,4 @@
 import {
-  Divider,
   List,
   ListItem,
   ListItemIcon,
@@ -9,11 +8,21 @@ import {
 import { selectMenuItems } from "../../redux/task/task.selectors";
 import { openTask } from "../../redux/task/task.reducer";
 import { connect } from "react-redux";
-import { COMPONENT_INFO } from "../apps/main";
+import { getComponentInfo } from "../apps/main";
+import TitleDivider from "../others/TitleDivider";
+import { APP_BAR_HEIGHT } from "./MyAppBar";
 
 const useStyles = makeStyles((theme) => ({
-  content: {
-    padding: theme.spacing(2)
+  list: {
+    maxHeight: Math.min(600, window.innerHeight - APP_BAR_HEIGHT - 20),
+    overflow: "scroll"
+  },
+  itemIcon: {
+    minWidth: 40
+  },
+  secondaryTypography: {
+    lineHeight: "12px",
+    fontSize: "smaller"
   }
 }));
 function MyAppBarMenu({
@@ -25,36 +34,43 @@ function MyAppBarMenu({
 }) {
   const classes = useStyles();
   return (
-    <div className={classes.content}>
-      <List dense>
-        {(menuItems || []).map((item, index) => {
-          if (item.component === "Divider") {
-            return <Divider key={index} />;
-          }
+    <List className={classes.list} dense>
+      {(menuItems || []).map((item, index) => {
+        if (item.component === "Divider") {
+          return <TitleDivider key={index} title={item.componentProps.title} />;
+        }
 
-          const appInfo = COMPONENT_INFO[item.component];
+        const appInfo = getComponentInfo(item);
 
-          return (
-            <ListItem
-              key={index}
-              onClick={() => {
-                openTask({
-                  component: item.component,
-                  componentProps: item.componentProps
-                });
-                closeMenu();
+        return (
+          <ListItem
+            button
+            key={index}
+            onClick={() => {
+              openTask({
+                component: item.component,
+                componentProps: item.componentProps
+              });
+              closeMenu();
+            }}
+          >
+            <ListItemIcon className={classes.itemIcon}>
+              {appInfo.icon({ size: "2x" })}
+            </ListItemIcon>
+            <ListItemText
+              primary={appInfo.appname}
+              primaryTypographyProps={{
+                className: classes.primaryTypography
               }}
-            >
-              <ListItemIcon>{appInfo.icon({})}</ListItemIcon>
-              <ListItemText
-                primary={appInfo.appname}
-                secondary={item.componentProps.subtitle}
-              />
-            </ListItem>
-          );
-        })}
-      </List>
-    </div>
+              secondary={item.componentProps.subtitle}
+              secondaryTypographyProps={{
+                className: classes.secondaryTypography
+              }}
+            />
+          </ListItem>
+        );
+      })}
+    </List>
   );
 }
 

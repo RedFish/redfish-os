@@ -4,6 +4,16 @@ const DEFAULT_SIZES = {
     //A4 page size ratio
     width: 450,
     height: 600
+  },
+  WebView: {
+    fullscreen: false,
+    width: 500,
+    height: 500
+  },
+  GitHubProjects: {
+    fullscreen: false,
+    width: 400,
+    height: 500
   }
 };
 

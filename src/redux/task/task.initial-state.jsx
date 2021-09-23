@@ -23,7 +23,68 @@ function defineDividerComponent(title) {
 
 export const INITIAL_STATE = {
   desktopFiles: [FILE_CV_FR, FILE_CV_EN],
-  menuItems: [defineDividerComponent("Fichiers"), FILE_CV_FR, FILE_CV_EN],
+  menuItems: [
+    defineDividerComponent("Profil"),
+    //Linkedin
+    {
+      component: "Link",
+      componentProps: {
+        appname: "Linkedin",
+        iconProps: {
+          icon: ["fab", "linkedin"],
+          color: "#0e76a8"
+        },
+        url: "https://www.linkedin.com/in/rguerci/"
+      }
+    },
+    //GitHub
+    {
+      component: "Link",
+      componentProps: {
+        appname: "GitHub",
+        iconProps: {
+          icon: ["fab", "github"],
+          color: "#212121"
+        },
+        url: "https://github.com/RedFish"
+      }
+    },
+    //Mail
+    {
+      component: "Link",
+      componentProps: {
+        appname: "Mail",
+        subtitle: "Contactez-moi",
+        iconProps: {
+          icon: "at",
+          color: "#472622"
+        },
+        url: "mailto:richard.guerci@telecomnancy.net"
+      }
+    },
+    defineDividerComponent("Apps"),
+    {
+      component: "GitHubProjects",
+      componentProps: {
+        apiUrl: "https://api.github.com/users/RedFish/repos"
+      }
+    },
+    {
+      component: "WebView",
+      componentProps: {
+        appname: "Générateur d'attestation",
+        iconProps: {
+          icon: "virus",
+          color: "#BDD834"
+        },
+        url: "https://redfish.github.io/generateur-attestation/",
+        githubUrl: "https://github.com/RedFish/generateur-attestation"
+      }
+    },
+    defineDividerComponent("Fichiers"),
+    FILE_CV_FR,
+    FILE_CV_EN
+  ],
   //All runing tasks
   //A task is identified by a unique id
   taskContents: {

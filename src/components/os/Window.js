@@ -11,7 +11,7 @@ import {
   selectCurrentTaskId,
   selectTaskZIndexes
 } from "../../redux/task/task.selectors";
-import { COMPONENT_INFO } from "../apps/main";
+import { getComponentInfo } from "../apps/main";
 import { APP_BAR_HEIGHT } from "./MyAppBar";
 
 const useStyles = makeStyles((theme) => ({
@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
     textOverflow: "ellipsis",
     width: width - 110,
     lineHeight: "40px",
+    fontSize: 15,
     paddingLeft: theme.spacing(2)
   }),
   buttons: {
@@ -68,8 +69,8 @@ function Window({
   const taskContext = useContext(TaskContext);
   const {
     windowProps,
-    updateTaskWindow,
-    closeTask,
+    handleUpdateTaskWindow,
+    handleCloseTask,
     taskId,
     component,
     componentProps
@@ -106,17 +107,17 @@ function Window({
   const handleClose = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    closeTask();
+    handleCloseTask();
   };
   const handleFullscreen = (e) => {
     e.stopPropagation();
-    updateTaskWindow((props) => ({ ...props, fullscreen: true }));
+    handleUpdateTaskWindow((props) => ({ ...props, fullscreen: true }));
   };
   const handleReduce = (e) => {
     e.stopPropagation();
   };
   const toggleFullscreen = () => {
-    updateTaskWindow((props) => ({
+    handleUpdateTaskWindow((props) => ({
       ...props,
       fullscreen: !props.fullscreen
     }));
@@ -125,7 +126,7 @@ function Window({
   // Draggable callbacks
   const onStart = (e, data) => {
     setIsDragging(true);
-    updateTaskWindow((props) => {
+    handleUpdateTaskWindow((props) => {
       //If full screen reset position
       if (props.fullscreen) {
         return { ...props, fullscreen: false, x: 0, y: 0 };
@@ -138,12 +139,12 @@ function Window({
   const onStop = (e, { x, y }) => {
     setIsDragging(false);
     // Update position
-    updateTaskWindow((props) => ({ ...props, x, y }));
+    handleUpdateTaskWindow((props) => ({ ...props, x, y }));
   };
 
   // Resizable
   const onResize = (event, { element, size, handle }) => {
-    updateTaskWindow((props) => ({ ...props, ...size }));
+    handleUpdateTaskWindow((props) => ({ ...props, ...size }));
   };
 
   // Re-render on resize
@@ -151,7 +152,7 @@ function Window({
     function handleResize() {
       // set max window size
       setMaxConstraints([window.innerWidth, window.innerHeight]);
-      updateTaskWindow((props) => {
+      handleUpdateTaskWindow((props) => {
         // resize bounds within maxConstraints
         const width = Math.min(props.width, window.innerWidth);
         const height = Math.min(props.height, window.innerHeight);
@@ -165,17 +166,17 @@ function Window({
       // Remove listener on unmount
       window.removeEventListener("resize", handleResize);
     };
-  }, [updateTaskWindow]);
+  }, [handleUpdateTaskWindow]);
 
   const title = useMemo(() => {
     const res = [];
-    const appInfo = COMPONENT_INFO[component];
+    const appInfo = getComponentInfo({ component, componentProps });
     res.push(appInfo.appname);
     if (componentProps.subtitle) {
       res.push(componentProps.subtitle);
     }
     return res.join(" - ");
-  }, [component, componentProps.subtitle]);
+  }, [component, componentProps]);
 
   return (
     <Draggable

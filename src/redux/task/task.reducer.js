@@ -1,3 +1,4 @@
+import { REHYDRATE } from "redux-persist";
 import { v4 as uuidv4 } from "uuid";
 import getDefaultWindowProps from "../../utils/getDefaultWindowProps";
 import { INITIAL_STATE } from "./task.initial-state";
@@ -41,6 +42,11 @@ const taskReducer = (state = INITIAL_STATE, action) => {
      */
     case ModuleActionTypes.OPEN_TASK: {
       const { component, componentProps } = action.payload;
+
+      if (component === "Link") {
+        window.open(componentProps.url);
+        return state;
+      }
 
       const taskId = uuidv4();
       const newTask = {
@@ -137,6 +143,17 @@ const taskReducer = (state = INITIAL_STATE, action) => {
         }
       };
     }
+
+    case REHYDRATE: {
+      return {
+        ...state,
+        ...action.payload.task,
+        //Get initial state to keep desktop and menu updated
+        desktopFiles: INITIAL_STATE.desktopFiles,
+        menuItems: INITIAL_STATE.menuItems
+      };
+    }
+
     default:
       return state;
   }

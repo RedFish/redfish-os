@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { openTask } from "../../redux/task/task.reducer";
 import { selectDesktopFiles } from "../../redux/task/task.selectors";
-import { COMPONENT_INFO } from "../apps/main";
+import { getComponentInfo } from "../apps/main";
 import DesktopIcon from "./DesktopIcon";
 
 const useStyles = makeStyles({
@@ -27,7 +27,7 @@ function Desktop({ desktopFiles, openTask }) {
       spacing={1}
     >
       {(desktopFiles || []).map((file, index) => {
-        const appInfo = COMPONENT_INFO[file.component];
+        const appInfo = getComponentInfo(file);
 
         return (
           <Grid item key={index}>

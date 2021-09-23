@@ -14,7 +14,7 @@ import {
   selectTaskContents,
   selectTaskXOrders
 } from "../../redux/task/task.selectors";
-import { COMPONENT_INFO } from "../apps/main";
+import { getComponentInfo } from "../apps/main";
 import MyAppBarItem from "./MyAppBarItem";
 import MyAppBarMenu from "./MyAppBarMenu";
 import MyAppBarTime from "./MyAppBarTime";
@@ -65,7 +65,7 @@ function MyAppBar({
             >
               {taskXOrders.map((taskId, index) => {
                 const taskContent = taskContents[taskId];
-                const appInfo = COMPONENT_INFO[taskContent.component];
+                const appInfo = getComponentInfo(taskContent);
 
                 return (
                   <MyAppBarItem
