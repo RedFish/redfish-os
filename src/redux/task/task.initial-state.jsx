@@ -72,7 +72,7 @@ export const INITIAL_STATE = {
     {
       component: "WebView",
       componentProps: {
-        appname: "Générateur d'attestation",
+        appname: "Générateur d'attestations",
         iconProps: {
           icon: "virus",
           color: "#BDD834"

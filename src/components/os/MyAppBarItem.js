@@ -44,6 +44,7 @@ function MyAppBarItem({ onClick, icon, appname, subtitle, isActive, onClose }) {
     <Tab
       className={classes.tab}
       icon={icon}
+      component="div"
       onClick={onClick}
       label={
         <React.Fragment>

@@ -27,6 +27,7 @@ const theme = createTheme({
         padding: 0
       }
     },
+    MuiFormControlLabel: { label: { marginRight: 4 } },
     MuiListItemText: { multiline: { marginTop: 0, marginBottom: 0 } },
     MuiTab: {
       labelIcon: {

@@ -8,12 +8,12 @@ const DEFAULT_SIZES = {
   WebView: {
     fullscreen: false,
     width: 500,
-    height: 500
+    height: 600
   },
   GitHubProjects: {
     fullscreen: false,
-    width: 400,
-    height: 500
+    width: 500,
+    height: 600
   }
 };
 
