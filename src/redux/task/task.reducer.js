@@ -3,34 +3,39 @@ import { v4 as uuidv4 } from "uuid";
 import getDefaultWindowProps from "../../utils/getDefaultWindowProps";
 import { INITIAL_STATE } from "./task.initial-state";
 //Action Types
-export const ModuleActionTypes = {
+export const TaskActionTypes = {
   OPEN_TASK: "OPEN_TASK",
   CLOSE_TASK: "CLOSE_TASK",
-  SELECT_TASK: "SELECT_TAB",
+  SELECT_TASK: "SELECT_TASK",
   UPDATE_TASK_WINDOW: "UPDATE_TASK_WINDOW",
-  UPDATE_TASK_COMPONENT: "UPDATE_TASK_COMPONENT"
+  UPDATE_TASK_COMPONENT: "UPDATE_TASK_COMPONENT",
+  UPDATE_DESKTOP: "UPDATE_DESKTOP"
 };
 
 //Actions
 export const openTask = ({ component, componentProps }) => ({
-  type: ModuleActionTypes.OPEN_TASK,
+  type: TaskActionTypes.OPEN_TASK,
   payload: { component, componentProps }
 });
 export const closeTask = ({ taskId }) => ({
-  type: ModuleActionTypes.CLOSE_TASK,
+  type: TaskActionTypes.CLOSE_TASK,
   payload: { taskId }
 });
 export const selectTask = ({ taskId }) => ({
-  type: ModuleActionTypes.SELECT_TASK,
+  type: TaskActionTypes.SELECT_TASK,
   payload: { taskId }
 });
 export const updateTaskWindow = ({ taskId, props }) => ({
-  type: ModuleActionTypes.UPDATE_TASK_WINDOW,
+  type: TaskActionTypes.UPDATE_TASK_WINDOW,
   payload: { taskId, props }
 });
 export const updateTaskComponent = ({ taskId, props }) => ({
-  type: ModuleActionTypes.UPDATE_TASK_COMPONENT,
+  type: TaskActionTypes.UPDATE_TASK_COMPONENT,
   payload: { taskId, props }
+});
+export const updateDesktop = ({ desktopFiles }) => ({
+  type: TaskActionTypes.UPDATE_DESKTOP,
+  payload: { desktopFiles }
 });
 
 //Reducer
@@ -40,7 +45,7 @@ const taskReducer = (state = INITIAL_STATE, action) => {
      * Open task
      *
      */
-    case ModuleActionTypes.OPEN_TASK: {
+    case TaskActionTypes.OPEN_TASK: {
       const { component, componentProps } = action.payload;
 
       if (component === "Link") {
@@ -71,7 +76,7 @@ const taskReducer = (state = INITIAL_STATE, action) => {
      * Close task
      *
      */
-    case ModuleActionTypes.CLOSE_TASK: {
+    case TaskActionTypes.CLOSE_TASK: {
       const { taskId } = action.payload;
 
       const newTaskContents = { ...state.taskContents };
@@ -91,14 +96,30 @@ const taskReducer = (state = INITIAL_STATE, action) => {
      * Select task
      *
      */
-    case ModuleActionTypes.SELECT_TASK: {
+    case TaskActionTypes.SELECT_TASK: {
       const { taskId } = action.payload;
 
       const newTaskZIndexes = state.taskZIndexes.filter((id) => id !== taskId);
 
+      let taskContents = state.taskContents;
+      if (state.taskContents[taskId]) {
+        taskContents = {
+          ...state.taskContents,
+          [taskId]: {
+            ...state.taskContents[taskId],
+            windowProps: {
+              ...state.taskContents[taskId].windowProps,
+              reduced: false
+            }
+          }
+        };
+      }
+
       return {
         ...state,
-        taskZIndexes: [...newTaskZIndexes, taskId]
+        taskZIndexes: [...newTaskZIndexes, taskId],
+        //Remove reduced
+        taskContents
       };
     }
 
@@ -106,7 +127,7 @@ const taskReducer = (state = INITIAL_STATE, action) => {
      * Update task props
      *
      */
-    case ModuleActionTypes.UPDATE_TASK_WINDOW: {
+    case TaskActionTypes.UPDATE_TASK_WINDOW: {
       const { taskId, props } = action.payload;
 
       const newProps =
@@ -114,8 +135,14 @@ const taskReducer = (state = INITIAL_STATE, action) => {
           ? props(state.taskContents[taskId].windowProps)
           : { ...state.taskContents[taskId].windowProps, ...props };
 
+      let newTaskZIndexes = state.taskZIndexes;
+      if (newProps.reduced) {
+        newTaskZIndexes = state.taskZIndexes.filter((id) => id !== taskId);
+      }
+
       return {
         ...state,
+        taskZIndexes: newTaskZIndexes,
         taskContents: {
           ...state.taskContents,
           [taskId]: { ...state.taskContents[taskId], windowProps: newProps }
@@ -127,7 +154,7 @@ const taskReducer = (state = INITIAL_STATE, action) => {
      * Update task component
      *
      */
-    case ModuleActionTypes.UPDATE_TASK_COMPONENT: {
+    case TaskActionTypes.UPDATE_TASK_COMPONENT: {
       const { taskId, props } = action.payload;
 
       const newProps =
@@ -144,7 +171,19 @@ const taskReducer = (state = INITIAL_STATE, action) => {
       };
     }
 
+    /** DESKTOP */
+    case TaskActionTypes.UPDATE_DESKTOP: {
+      const { desktopFiles } = action.payload;
+
+      return {
+        ...state,
+        desktopFiles
+      };
+    }
+
+    /** REDUX PERSIST REHYDRATE */
     case REHYDRATE: {
+      if (!action.payload) return { ...state, ...INITIAL_STATE };
       return {
         ...state,
         ...action.payload.task,

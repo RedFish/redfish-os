@@ -15,7 +15,8 @@ import { getComponentInfo } from "../apps/main";
 import { APP_BAR_HEIGHT } from "./MyAppBar";
 
 const useStyles = makeStyles((theme) => ({
-  root: ({ width, height, zIndex }) => ({
+  root: ({ width, height, zIndex, reduced }) => ({
+    visibility: reduced ? "hidden" : "visible",
     backgroundColor: "white",
     width,
     height,
@@ -100,7 +101,8 @@ function Window({
     isDragging,
     width,
     height,
-    zIndex: taskZIndexes.indexOf(taskId)
+    zIndex: taskZIndexes.indexOf(taskId),
+    reduced: windowProps.reduced
   });
 
   // Window actions
@@ -112,10 +114,14 @@ function Window({
   };
   const handleFullscreen = (e) => {
     e.stopPropagation();
-    handleUpdateTaskWindow((props) => ({ ...props, fullscreen: true }));
+    handleUpdateTaskWindow((props) => ({
+      ...props,
+      fullscreen: !props.fullscreen
+    }));
   };
   const handleReduce = (e) => {
     e.stopPropagation();
+    handleUpdateTaskWindow((props) => ({ ...props, reduced: true }));
   };
   const toggleFullscreen = () => {
     handleUpdateTaskWindow((props) => ({

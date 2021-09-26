@@ -7,6 +7,7 @@ import {
   Toolbar
 } from "@material-ui/core";
 import { MoreVert } from "@material-ui/icons";
+import { useMemo } from "react";
 import { connect } from "react-redux";
 import { closeTask, selectTask } from "../../redux/task/task.reducer";
 import {
@@ -45,6 +46,11 @@ function MyAppBar({
 }) {
   const classes = useStyles();
 
+  const tabIndex = useMemo(() => {
+    const index = taskXOrders.indexOf(currentTaskId);
+    return index === -1 ? 0 : index;
+  }, [currentTaskId, taskXOrders]);
+
   return (
     <AppBar position="fixed" color="primary" className={classes.appBar}>
       <Toolbar variant="dense">
@@ -58,11 +64,7 @@ function MyAppBar({
             <MyAppBarMenu />
           </Grid>
           <Grid item className={classes.tabs}>
-            <Tabs
-              value={taskXOrders.indexOf(currentTaskId)}
-              variant="scrollable"
-              scrollButtons="on"
-            >
+            <Tabs value={tabIndex} variant="scrollable" scrollButtons="on">
               {taskXOrders.map((taskId, index) => {
                 const taskContent = taskContents[taskId];
                 const appInfo = getComponentInfo(taskContent);
