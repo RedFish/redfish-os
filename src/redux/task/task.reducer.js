@@ -2,6 +2,8 @@ import { REHYDRATE } from "redux-persist";
 import { v4 as uuidv4 } from "uuid";
 import getDefaultWindowProps from "../../utils/getDefaultWindowProps";
 import { INITIAL_STATE } from "./task.initial-state";
+import ReactGA from "react-ga";
+
 //Action Types
 export const TaskActionTypes = {
   OPEN_TASK: "OPEN_TASK",
@@ -48,6 +50,11 @@ const taskReducer = (state = INITIAL_STATE, action) => {
     case TaskActionTypes.OPEN_TASK: {
       const { component, componentProps } = action.payload;
 
+      ReactGA.event({
+        category: action.type,
+        action: component
+      });
+
       if (component === "Link") {
         window.open(componentProps.url);
         return state;
@@ -80,6 +87,12 @@ const taskReducer = (state = INITIAL_STATE, action) => {
       const { taskId } = action.payload;
 
       const newTaskContents = { ...state.taskContents };
+
+      ReactGA.event({
+        category: action.type,
+        action: newTaskContents[taskId].component
+      });
+
       delete newTaskContents[taskId];
       const newTaskZIndexes = state.taskZIndexes.filter((id) => id !== taskId);
       const newTaskXOrders = state.taskXOrders.filter((id) => id !== taskId);
