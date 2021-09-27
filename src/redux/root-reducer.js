@@ -9,7 +9,7 @@ import taskReducer from "./task/task.reducer";
 export const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["module"],
+  whitelist: ["task"],
   stateReconciler: autoMergeLevel2 //https://blog.reactnativecoach.com/the-definitive-guide-to-redux-persist-84738167975
 };
 

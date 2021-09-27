@@ -1,70 +1,12 @@
-# Getting Started with Create React App
+# À propos du projet et de l'auteur
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Redfish OS a vu le jour en septembre 2021, je souhaitais présenter mes projets et mes compétences de manière plus interactive qu'un simple CV ou profil Linkedin.
 
-## Available Scripts
+"Redfish" fait référence à mon pseudo GitHub et "OS" comme operating system car ce projet a pour vocation de permettre l'exécution de plusieurs projets et applications.  
+Il est écrit en javascript et utilise le framework React de Facebook et Redux comme gestionnaire d'état.
 
-In the project directory, you can run:
+Ingénieur en informatique diplômé de Télécom Nancy en 2014, spécialité ingénierie du logiciel, j'ai commencé ma carrière chez Deloitte Luxembourg pour développer et mettre en place un datawarehouse pour une grande assurance du Luxembourg (Oracle, PL/SQL, C#). J'ai ensuite changé de domaine pour me spécialiser dans les technologies mobiles Android, iOS et React Native (+10K téléchargement).
 
-### `npm start`
+Début 2020 je me lance dans une nouvelle aventure: le développement d'un logiciel de gestion d'entreprise pour tous les professionnels du bâtiment. Ce dernier permettra d’éditer des devis, fiches de travail, contrats de maintenance, factures, relances de paiement, ... et de faciliter le traitement des documents fournisseurs (commandes, livraisons, factures, ...).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Bonne navigation sur [Redfish OS](http://RedFish.github.io/redfish-os) et n'hésitez pas à me faire part de vos remarques et idées d'améliorations.

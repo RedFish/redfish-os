@@ -1,3 +1,5 @@
+import getDefaultWindowProps from "../../utils/getDefaultWindowProps";
+
 const FILE_CV_FR = {
   component: "PDF",
   componentProps: {
@@ -11,6 +13,10 @@ const FILE_CV_EN = {
     subtitle: "CV Richard Guerci - EN.pdf",
     url: process.env.PUBLIC_URL + "/Curriculum_Vitae_Richard_GUERCI_EN.pdf"
   }
+};
+export const ABOUT_APP = {
+  component: "About",
+  componentProps: {}
 };
 function defineDividerComponent(title) {
   return {
@@ -62,6 +68,7 @@ export const INITIAL_STATE = {
         url: "mailto:richard.guerci@telecomnancy.net"
       }
     },
+    ABOUT_APP,
     defineDividerComponent("Apps"),
     {
       component: "GitHubProjects",
@@ -103,9 +110,14 @@ export const INITIAL_STATE = {
       componentProps: {} //All props to pass to `component`
     }
     */
+    welcome: {
+      taskId: "welcome",
+      windowProps: getDefaultWindowProps(ABOUT_APP.component, 0),
+      ...ABOUT_APP
+    }
   },
   //Contains all tasks id => z-index of a task is defined by its uuid position in this array
-  taskZIndexes: [],
+  taskZIndexes: ["welcome"],
   //Contains all tasks id  => define app bar order
-  taskXOrders: []
+  taskXOrders: ["welcome"]
 };

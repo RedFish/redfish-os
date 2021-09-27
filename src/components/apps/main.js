@@ -43,6 +43,17 @@ const COMPONENT_INFO = {
 
       return <img src={SupermiroLogo} width={size} alt="Surpermiro Logo" />;
     }
+  },
+  About: {
+    appname: "À Propos",
+    icon: (props) => (
+      <FontAwesomeIcon
+        icon="info-circle"
+        size="4x"
+        color="#322ff5"
+        {...props}
+      />
+    )
   }
 };
 

@@ -5,12 +5,14 @@ const PDF = lazy(() => import("../apps/PDF"));
 const WebView = lazy(() => import("../apps/WebView"));
 const GitHubProjects = lazy(() => import("../apps/GitHubProjects"));
 const Supermiro = lazy(() => import("../apps/Supermiro"));
+const About = lazy(() => import("../apps/About"));
 
 const components = {
   PDF,
   WebView,
   GitHubProjects,
-  Supermiro
+  Supermiro,
+  About
 };
 
 function ComponentLoader(props) {

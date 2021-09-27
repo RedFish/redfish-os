@@ -19,6 +19,11 @@ const DEFAULT_SIZES = {
     fullscreen: false,
     width: 660,
     height: 660
+  },
+  About: {
+    fullscreen: false,
+    width: 500,
+    height: 600
   }
 };
 

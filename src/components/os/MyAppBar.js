@@ -9,7 +9,8 @@ import {
 import { MoreVert } from "@material-ui/icons";
 import { useMemo } from "react";
 import { connect } from "react-redux";
-import { closeTask, selectTask } from "../../redux/task/task.reducer";
+import { ABOUT_APP } from "../../redux/task/task.initial-state";
+import { closeTask, openTask, selectTask } from "../../redux/task/task.reducer";
 import {
   selectCurrentTaskId,
   selectTaskContents,
@@ -46,6 +47,7 @@ function MyAppBar({
   currentTaskId,
   //Redux action
   selectTask,
+  openTask,
   closeTask
 }) {
   const classes = useStyles();
@@ -103,7 +105,13 @@ function MyAppBar({
               alignItems="center"
             >
               <Grid item>
-                <IconButton color="inherit" className={classes.about}>
+                <IconButton
+                  color="inherit"
+                  className={classes.about}
+                  onClick={() => {
+                    openTask(ABOUT_APP);
+                  }}
+                >
                   <MoreVert />
                 </IconButton>
               </Grid>
@@ -126,6 +134,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   selectTask: (payload) => dispatch(selectTask(payload)),
+  openTask: (payload) => dispatch(openTask(payload)),
   closeTask: (payload) => dispatch(closeTask(payload))
 });
 
