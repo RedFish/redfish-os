@@ -28,10 +28,14 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0
   },
   tabs: {
-    width: "calc(100% - 140px)",
+    width: "calc(100% - 160px)",
     "& .MuiTabs-scroller": {
       height: APP_BAR_HEIGHT
     }
+  },
+  about: {
+    marginRight: 10,
+    padding: 10
   }
 }));
 
@@ -97,10 +101,9 @@ function MyAppBar({
               direction="row"
               justifyContent="center"
               alignItems="center"
-              spacing={1}
             >
               <Grid item>
-                <IconButton color="inherit">
+                <IconButton color="inherit" className={classes.about}>
                   <MoreVert />
                 </IconButton>
               </Grid>

@@ -4,11 +4,13 @@ import TaskContext from "../../contexts/TaskContext";
 const PDF = lazy(() => import("../apps/PDF"));
 const WebView = lazy(() => import("../apps/WebView"));
 const GitHubProjects = lazy(() => import("../apps/GitHubProjects"));
+const Supermiro = lazy(() => import("../apps/Supermiro"));
 
 const components = {
   PDF,
   WebView,
-  GitHubProjects
+  GitHubProjects,
+  Supermiro
 };
 
 function ComponentLoader(props) {

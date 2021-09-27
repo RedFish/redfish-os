@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(2)
   },
   windowContent: {
+    overflow: "hidden",
     position: "relative",
     flex: 1
   },

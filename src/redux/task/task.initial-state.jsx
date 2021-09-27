@@ -81,6 +81,10 @@ export const INITIAL_STATE = {
         githubUrl: "https://github.com/RedFish/generateur-attestation"
       }
     },
+    {
+      component: "Supermiro",
+      componentProps: {}
+    },
     defineDividerComponent("Fichiers"),
     FILE_CV_FR,
     FILE_CV_EN

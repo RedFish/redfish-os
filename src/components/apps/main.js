@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SupermiroLogo from "../../assets/supermiro/icon.png";
 
 const COMPONENT_INFO = {
   PDF: {
@@ -27,6 +28,21 @@ const COMPONENT_INFO = {
     icon: (props) => (
       <FontAwesomeIcon icon="satellite" size="4x" color="#f5ac2f" {...props} />
     )
+  },
+  Supermiro: {
+    appname: "Supermiro",
+    icon: (props) => {
+      let size;
+      switch (props.size) {
+        case "2x":
+          size = 28;
+          break;
+        default:
+          size = 52;
+      }
+
+      return <img src={SupermiroLogo} width={size} alt="Surpermiro Logo" />;
+    }
   }
 };
 
