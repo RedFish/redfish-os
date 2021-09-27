@@ -9,4 +9,4 @@ Ingénieur en informatique diplômé de Télécom Nancy en 2014, spécialité in
 
 Début 2020 je me lance dans une nouvelle aventure: le développement d'un logiciel de gestion d'entreprise pour tous les professionnels du bâtiment. Ce dernier permettra d’éditer des devis, fiches de travail, contrats de maintenance, factures, relances de paiement, ... et de faciliter le traitement des documents fournisseurs (commandes, livraisons, factures, ...).
 
-Bonne navigation sur [Redfish OS](http://RedFish.github.io/redfish-os) et n'hésitez pas à me faire part de vos remarques et idées d'améliorations.
+Bonne navigation sur [Redfish OS](https://RedFish.github.io/redfish-os) et n'hésitez pas à me faire part de vos remarques et idées d'améliorations.
