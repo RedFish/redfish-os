@@ -2,7 +2,7 @@ import { REHYDRATE } from "redux-persist";
 import { v4 as uuidv4 } from "uuid";
 import getDefaultWindowProps from "../../utils/getDefaultWindowProps";
 import { INITIAL_STATE } from "./task.initial-state";
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 
 //Action Types
 export const TaskActionTypes = {
