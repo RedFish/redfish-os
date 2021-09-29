@@ -95,7 +95,6 @@ function SplashScreen({ children }) {
           100,
           progress + Math.random() * getSpeed(progress)
         );
-        console.log("progress", progress);
         if (newProgress >= 100) {
           clearInterval(secTimer);
         }
