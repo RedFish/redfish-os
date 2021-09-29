@@ -1,0 +1,2 @@
+(this["webpackJsonpredfish-os"]=this["webpackJsonpredfish-os"]||[]).push([[8],{179:function(t,e,o){"use strict";o.r(e);var s=o(0),i=o(36),r=o(153),a=o(2),c=Object(r.a)({webviewRoot:{position:"absolute",top:0,left:0,right:0,bottom:0,width:"100%",height:"100%",border:0}});e.default=function(t){var e=c(),o=Object(s.useContext)(i.a).componentProps;return Object(a.jsx)("iframe",{title:"iframe",className:e.webviewRoot,src:o.url})}}}]);
+//# sourceMappingURL=8.daeab70e.chunk.js.map
