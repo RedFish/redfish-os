@@ -10,10 +10,10 @@ import { Button, Grid, makeStyles } from "@material-ui/core";
 const useStyles = makeStyles({
   root: {
     position: "absolute",
-    top: "50%",
     left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 600,
+    transform: "translate(-50%, 0%)",
+    width: "100%",
+    height: "100%",
     overflow: "scroll"
   },
   phoneContainer: {

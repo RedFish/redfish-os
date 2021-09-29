@@ -6,11 +6,11 @@ import { APP_BAR_HEIGHT } from "./MyAppBar";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    height: "100vh"
+    height: "100vh",
+    backgroundImage: `url(${Wallpaper})`,
+    backgroundPosition: "center center"
   },
   desktop: {
-    backgroundImage: `url(${Wallpaper})`,
-    backgroundPosition: "center center",
     overflow: "hidden",
     flex: 1
   },

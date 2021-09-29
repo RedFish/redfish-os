@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import Desktop from "./components/os/Desktop";
 import { selectTaskContentsValues } from "./redux/task/task.selectors";
 import TaskContextProvider from "./contexts/TaskContextProvider";
+import SplashScreen from "./components/os/SplashScreen";
 
 const theme = createTheme({
   palette: {
@@ -53,18 +54,20 @@ const theme = createTheme({
 function App({ taskContents }) {
   return (
     <ThemeProvider theme={theme}>
-      <Screen>
-        <Desktop />
-        {taskContents.map((taskContent) => {
-          return (
-            <TaskContextProvider
-              key={taskContent.taskId}
-              taskContent={taskContent}
-            />
-          );
-        })}
-      </Screen>
-      <MyAppBar />
+      <SplashScreen>
+        <Screen>
+          <Desktop />
+          {taskContents.map((taskContent) => {
+            return (
+              <TaskContextProvider
+                key={taskContent.taskId}
+                taskContent={taskContent}
+              />
+            );
+          })}
+        </Screen>
+        <MyAppBar />
+      </SplashScreen>
     </ThemeProvider>
   );
 }

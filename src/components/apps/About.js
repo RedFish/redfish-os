@@ -49,7 +49,7 @@ function About() {
           Luxembourg pour développer et mettre en place un datawarehouse pour
           une grande assurance du Luxembourg (Oracle, PL/SQL, C#). J'ai ensuite
           changé de domaine pour me spécialiser dans les technologies mobiles
-          Android, iOS et React Native (+10K téléchargement).
+          Android, iOS et React Native (+10K téléchargements).
           <br />
           <br />
           Début 2020 je me lance dans une nouvelle aventure: le développement

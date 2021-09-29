@@ -17,8 +17,8 @@ const DEFAULT_SIZES = {
   },
   Supermiro: {
     fullscreen: false,
-    width: 660,
-    height: 660
+    width: 600,
+    height: 680
   },
   About: {
     fullscreen: false,
