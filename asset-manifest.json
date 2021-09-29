@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/redfish-os/static/css/main.20c392e4.chunk.css",
-    "main.js": "/redfish-os/static/js/main.b11c6f41.chunk.js",
-    "main.js.map": "/redfish-os/static/js/main.b11c6f41.chunk.js.map",
+    "main.js": "/redfish-os/static/js/main.bbca74b0.chunk.js",
+    "main.js.map": "/redfish-os/static/js/main.bbca74b0.chunk.js.map",
     "runtime-main.js": "/redfish-os/static/js/runtime-main.f37db8be.js",
     "runtime-main.js.map": "/redfish-os/static/js/runtime-main.f37db8be.js.map",
     "static/js/2.3770a7c6.chunk.js": "/redfish-os/static/js/2.3770a7c6.chunk.js",
@@ -37,6 +37,6 @@
     "static/js/runtime-main.f37db8be.js",
     "static/js/2.3770a7c6.chunk.js",
     "static/css/main.20c392e4.chunk.css",
-    "static/js/main.b11c6f41.chunk.js"
+    "static/js/main.bbca74b0.chunk.js"
   ]
 }
